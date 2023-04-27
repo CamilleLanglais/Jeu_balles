@@ -6,11 +6,10 @@ float phy = 60.0f; // Angle between z axis and viewpoint
 float dist_zoom = 30.0f; // Distance between origin and viewpoint
 
 void setCamera() {
-	gluLookAt(10., 0., 0.,
-		//dist_zoom*cos(toRad(theta))*sin(toRad(phy)),
-		  //dist_zoom*sin(toRad(theta))*sin(toRad(phy)),
-			  //dist_zoom*cos(toRad(phy)),
-			  0.0,0.0,0.0, 
+	gluLookAt(dist_zoom*cos(toRad(theta))*sin(toRad(phy)),
+			  dist_zoom*sin(toRad(theta))*sin(toRad(phy)),
+			  dist_zoom*cos(toRad(phy)),
+			  0.0,0.0,0.0,
 			  0.0,0.0,1.0);
 }
 
@@ -26,6 +25,21 @@ void drawSquare() {
 		glVertex3f(0.5,-0.5,0.0);
 		glVertex3f(0.5,0.5,0.0);
 		glVertex3f(-0.5,0.5,0.0);
+	glEnd();
+}
+
+void drawCube() {
+	glBegin(GL_TRIANGLE_FAN);
+		glVertex3f(-0.5,-0.5,-0.5);
+		glVertex3f(0.5,-0.5,-0.5);
+		glVertex3f(0.5,0.5,-0.5);
+		glVertex3f(-0.5,0.5,-0.5);
+		glVertex3f(-0.5,0.5,0.5);
+		glVertex3f(-0.5,-0.5,0.5);
+		glVertex3f(0.5,-0.5,0.5);
+		glVertex3f(0.5,-0.5,-0.5);
+		glVertex3f(0.5,0.5,-0.5);
+		glVertex3f(0.5,0.5,0.5);
 	glEnd();
 }
 

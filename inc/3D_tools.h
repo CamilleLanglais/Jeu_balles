@@ -28,6 +28,8 @@ void drawSquare();
 
 void drawCircle();
 
+void drawCube();
+
 void drawCone();
 
 void drawSphere();
