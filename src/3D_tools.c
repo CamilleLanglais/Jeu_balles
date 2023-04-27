@@ -2,13 +2,13 @@
 
 /* Camera parameters and functions */
 float theta = 45.0f; // Angle between x axis and viewpoint
-float phy = 60.0f; // Angle between z axis and viewpoint
+float phy = 86.0f; // Angle between z axis and viewpoint
 float dist_zoom = 30.0f; // Distance between origin and viewpoint
 
 void setCamera() {
-	gluLookAt(dist_zoom*cos(toRad(theta))*sin(toRad(phy)),
-			  dist_zoom*sin(toRad(theta))*sin(toRad(phy)),
-			  dist_zoom*cos(toRad(phy)),
+	gluLookAt(10.0,
+			  0.0,
+			  0.0,
 			  0.0,0.0,0.0,
 			  0.0,0.0,1.0);
 }
@@ -19,7 +19,7 @@ float toRad(float deg) {
 }
 
 
-void drawSquare() {
+void drawSquareXY() {
 	glBegin(GL_TRIANGLE_FAN);
 		glVertex3f(-0.5,-0.5,0.0);
 		glVertex3f(0.5,-0.5,0.0);
@@ -28,18 +28,21 @@ void drawSquare() {
 	glEnd();
 }
 
-void drawCube() {
+void drawSquareXZ() {
 	glBegin(GL_TRIANGLE_FAN);
-		glVertex3f(-0.5,-0.5,-0.5);
-		glVertex3f(0.5,-0.5,-0.5);
-		glVertex3f(0.5,0.5,-0.5);
-		glVertex3f(-0.5,0.5,-0.5);
-		glVertex3f(-0.5,0.5,0.5);
-		glVertex3f(-0.5,-0.5,0.5);
-		glVertex3f(0.5,-0.5,0.5);
-		glVertex3f(0.5,-0.5,-0.5);
-		glVertex3f(0.5,0.5,-0.5);
-		glVertex3f(0.5,0.5,0.5);
+		glVertex3f(-0.5,0.0,-0.5);
+		glVertex3f(0.5,0.0,-0.5);
+		glVertex3f(0.5,0.0,0.5);
+		glVertex3f(-0.5,0.0,0.5);
+	glEnd();
+}
+
+void drawSquareYZ() {
+	glBegin(GL_TRIANGLE_FAN);
+		glVertex3f(0.0,-0.5,-0.5);
+		glVertex3f(0,0.5,-0.5);
+		glVertex3f(0,0.5,0.5);
+		glVertex3f(0.0,-0.5,0.5);
 	glEnd();
 }
 
