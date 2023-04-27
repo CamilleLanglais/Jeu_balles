@@ -7,35 +7,34 @@ void drawCorridor(){
     //sol
     glPushMatrix();
 		glTranslatef(0.,0.,-5.);
-		glScalef(30.0,10.0,-2.5);
+		glScalef(130., 40., 1.);
 		glColor3f(0.0,0.0,0.5);
-		drawSquare();
-		glPopMatrix();
+		drawSquareXY();
+	glPopMatrix();
 
-    //Mur gauche
+    // Mur gauche
 	glPushMatrix();
-		glTranslatef(-5., -2., 0.);
-		glScalef(30., 10., 4.);
-		glRotatef(90.,1.,0.,0.);
+		glTranslatef(0., -10., 0.);
+		glScalef(100., 1., 100.);
 		glColor3f(0.,0.5,0.5);
-		drawSquare();
+		drawSquareXZ();
     glPopMatrix();
 
 // mur droit
 	glPushMatrix();
-		glTranslatef(-5., -2., 0.);
-		glScalef(30., 10., 4.);
-		glRotatef(180.,1.,0., 0.);
+		// glTranslatef(-5., -2., 0.);
+		glTranslatef(0., 10., 0.);
+		glScalef(100., 1., 100.);
 		glColor3f(0.,0.5,0.5);
-		drawSquare();
+		drawSquareXZ();
     glPopMatrix();
 
 
     //plafond
     glPushMatrix();
 		glTranslatef(0.,0.,5.);
-		glScalef(30.0,10.0,2.5);
-		glColor3f(0.5,0.0,0.5);
-		drawSquare();
+		glScalef(130., 40., 1.);
+		glColor3f(0.0,0.0,0.5);
+		drawSquareXY();
 	glPopMatrix();
 }
