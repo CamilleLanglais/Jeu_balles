@@ -19,13 +19,30 @@ float toRad(float deg) {
 	return deg*M_PI/180.0f;
 }
 
-
-void drawSquare() {
+void drawSquareXY() {
 	glBegin(GL_TRIANGLE_FAN);
 		glVertex3f(-0.5,-0.5,0.0);
 		glVertex3f(0.5,-0.5,0.0);
 		glVertex3f(0.5,0.5,0.0);
 		glVertex3f(-0.5,0.5,0.0);
+	glEnd();
+}
+
+void drawSquareXZ() {
+	glBegin(GL_TRIANGLE_FAN);
+		glVertex3f(-0.5,0.0,-0.5);
+		glVertex3f(0.5,0.0,-0.5);
+		glVertex3f(0.5,0.0,0.5);
+		glVertex3f(-0.5,0.0,0.5);
+	glEnd();
+}
+
+void drawSquareYZ() {
+	glBegin(GL_TRIANGLE_FAN);
+		glVertex3f(0.0,-0.5,-0.5);
+		glVertex3f(0,0.5,-0.5);
+		glVertex3f(0,0.5,0.5);
+		glVertex3f(0.0,-0.5,0.5);
 	glEnd();
 }
 
