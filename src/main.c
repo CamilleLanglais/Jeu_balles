@@ -14,6 +14,7 @@
 #include "3D_tools.h"
 #include "draw_scene.h"
 #include "corridor.h"
+#include "raquette.h"
 
 
 /* Window properties */
@@ -140,10 +141,10 @@ int main(int argc, char** argv)
 		/* Initial scenery setup */
 		drawCorridor();
 
-		
+		drawRaquette();
 
 		/* Scene rendering */
-		drawFrame();
+		//drawFrame();
 
 		// glPushMatrix();
 		// glColor3f(1.0,0.0,0.0);
