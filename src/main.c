@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <stdbool.h>
 
 #include "3D_tools.h"
 #include "draw_scene.h"
@@ -20,7 +21,7 @@
 /* Window properties */
 static const unsigned int WINDOW_WIDTH = 1000;
 static const unsigned int WINDOW_HEIGHT = 1000;
-static const char WINDOW_TITLE[] = "TD04 Ex01";
+static const char WINDOW_TITLE[] = "Projet";
 static float aspectRatio = 1.0;
 
 /* Minimal time wanted between two images */
@@ -29,6 +30,11 @@ static const double FRAMERATE_IN_SECONDS = 1. / 30.;
 /* IHM flag */
 static int flag_animate_rot_scale = 0;
 static int flag_animate_rot_arm = 0;
+
+double newX = 0.;
+double newY = 0.;
+bool lbutton_down = false;
+double alpha = 60.0;
 
 /* Error handling function */
 void onError(int error, const char* description)
@@ -43,7 +49,7 @@ void onWindowResized(GLFWwindow* window, int width, int height)
 	glViewport(0, 0, width, height);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(60.0,aspectRatio,Z_NEAR,Z_FAR);
+	gluPerspective(alpha,aspectRatio,Z_NEAR,Z_FAR);
 	glMatrixMode(GL_MODELVIEW);
 }
 
@@ -94,6 +100,13 @@ void onKey(GLFWwindow* window, int key, int scancode, int action, int mods)
 	}
 }
 
+void mouse_mouv(GLFWwindow* window, double xpos, double ypos){
+	glfwGetCursorPos(window, &xpos, &ypos);
+	double h = (tan(alpha/2))*2;
+	newX = -((xpos-(WINDOW_WIDTH/2.0))*(h/WINDOW_WIDTH));
+	newY = ((ypos-(WINDOW_HEIGHT/2.0))*(h/WINDOW_HEIGHT));
+}
+
 int main(int argc, char** argv)
 {
 	/* GLFW initialisation */
@@ -117,6 +130,8 @@ int main(int argc, char** argv)
 
 	glfwSetWindowSizeCallback(window,onWindowResized);
 	glfwSetKeyCallback(window, onKey);
+	//glfwSetMouseButtonCallback(window, mouse_button_callback);
+	glfwSetCursorPosCallback(window, mouse_mouv);
 
 	onWindowResized(window,WINDOW_WIDTH,WINDOW_HEIGHT);
 
@@ -140,8 +155,7 @@ int main(int argc, char** argv)
 
 		/* Initial scenery setup */
 		drawCorridor();
-
-		drawRaquette();
+		drawRaquette(newX, newY);
 
 		/* Scene rendering */
 		//drawFrame();

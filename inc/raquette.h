@@ -2,4 +2,4 @@
 #include "3D_tools.h"
 #include <math.h>
 
-void drawRaquette();
+void drawRaquette(float x, float y);
