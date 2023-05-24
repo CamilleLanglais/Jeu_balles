@@ -15,6 +15,7 @@
 #include "3D_tools.h"
 #include "draw_scene.h"
 #include "corridor.h"
+#include "ball.h"
 #include "raquette.h"
 
 
@@ -138,11 +139,15 @@ int main(int argc, char** argv)
 	glPointSize(5.0);
 	glEnable(GL_DEPTH_TEST);
 
+	float profondeur=0.;
+	float vitesse_corridor=0.2;
+
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
 	{
 		/* Get time (in second) at loop beginning */
 		double startTime = glfwGetTime();
+		
 
 		/* Cleaning buffers and setting Matrix Mode */
 		glClearColor(0.2,0.0,0.0,0.0);
@@ -154,11 +159,27 @@ int main(int argc, char** argv)
 		setCamera();
 
 		/* Initial scenery setup */
-		drawCorridor();
-		drawRaquette(newX, newY);
+		// int profondeur= + vitesse_corridor*elapsedTime;
+		// drawCorridor(profondeur);
+		
+		double elapsedTime = glfwGetTime() - startTime;
+		/* If to few time is spend vs our wanted FPS, we wait */
+		
+
+
+
+		if(elapsedTime < FRAMERATE_IN_SECONDS)
+		{
+			glfwWaitEventsTimeout(FRAMERATE_IN_SECONDS-elapsedTime);
+					
+		}
+		profondeur +=  vitesse_corridor;
+			drawCorridor(profondeur);
+			drawball();
+			drawRaquette(newX, newY);
 
 		/* Scene rendering */
-		//drawFrame();
+		drawFrame();
 
 		// glPushMatrix();
 		// glColor3f(1.0,0.0,0.0);
@@ -184,12 +205,18 @@ int main(int argc, char** argv)
 		glfwPollEvents();
 
 		/* Elapsed time computation from loop begining */
-		double elapsedTime = glfwGetTime() - startTime;
-		/* If to few time is spend vs our wanted FPS, we wait */
-		if(elapsedTime < FRAMERATE_IN_SECONDS)
-		{
-			glfwWaitEventsTimeout(FRAMERATE_IN_SECONDS-elapsedTime);
-		}
+		// double elapsedTime = glfwGetTime() - startTime;
+		// /* If to few time is spend vs our wanted FPS, we wait */
+		// // profondeur +=  vitesse_corridor*elapsedTime;
+		
+		
+		// if(elapsedTime < FRAMERATE_IN_SECONDS)
+		// {
+		// 	glfwWaitEventsTimeout(FRAMERATE_IN_SECONDS-elapsedTime);
+		// }
+		
+		
+		
 
 		/* Animate scenery */
 	}
