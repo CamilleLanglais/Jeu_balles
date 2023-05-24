@@ -46,6 +46,9 @@ void drawSquareYZ() {
 	glEnd();
 }
 
+
+
+
 void drawCircle() {
 	glBegin(GL_TRIANGLE_FAN);
 		glVertex3f(0.0,0.0,0.0);
