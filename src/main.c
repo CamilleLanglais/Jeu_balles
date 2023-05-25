@@ -104,8 +104,12 @@ void onKey(GLFWwindow* window, int key, int scancode, int action, int mods)
 void mouse_mouv(GLFWwindow* window, double xpos, double ypos){
 	glfwGetCursorPos(window, &xpos, &ypos);
 	double h = (tan(alpha/2))*2;
-	newX = -((xpos-(WINDOW_WIDTH/2.0))*(h/WINDOW_WIDTH));
-	newY = ((ypos-(WINDOW_HEIGHT/2.0))*(h/WINDOW_HEIGHT));
+	if(xpos >= 120  && xpos <= WINDOW_WIDTH-120){
+		newX = -((xpos-(WINDOW_WIDTH/2.0))*(h/WINDOW_WIDTH));
+	}
+	if (ypos >=120 && ypos <= WINDOW_HEIGHT -120){
+		newY = ((ypos-(WINDOW_HEIGHT/2.0))*(h/WINDOW_HEIGHT));
+	}
 }
 
 int main(int argc, char** argv)
@@ -179,7 +183,7 @@ int main(int argc, char** argv)
 			drawRaquette(newX, newY);
 
 		/* Scene rendering */
-		drawFrame();
+		//drawFrame();
 
 		// glPushMatrix();
 		// glColor3f(1.0,0.0,0.0);
