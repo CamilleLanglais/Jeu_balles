@@ -19,6 +19,8 @@
 #include "raquette.h"
 
 
+
+
 /* Window properties */
 static const unsigned int WINDOW_WIDTH = 1000;
 static const unsigned int WINDOW_HEIGHT = 1000;
@@ -99,6 +101,7 @@ void onKey(GLFWwindow* window, int key, int scancode, int action, int mods)
 			default: fprintf(stdout,"Touche non gérée (%d)\n",key);
 		}
 	}
+	
 }
 
 void mouse_mouv(GLFWwindow* window, double xpos, double ypos){
@@ -107,6 +110,11 @@ void mouse_mouv(GLFWwindow* window, double xpos, double ypos){
 	newX = -((xpos-(WINDOW_WIDTH/2.0))*(h/WINDOW_WIDTH));
 	newY = ((ypos-(WINDOW_HEIGHT/2.0))*(h/WINDOW_HEIGHT));
 }
+// void mouse_button_right_click(GLFWwindow* window, int button, int action, int mods){
+//    if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS){
+
+//    }
+// }
 
 int main(int argc, char** argv)
 {
@@ -141,7 +149,12 @@ int main(int argc, char** argv)
 
 	float profondeur=0.;
 	float vitesse_corridor=0.2;
+	float taille = 1000;
+	Ball *ball = initBall(0, 0, 0, -0.1, 0., 0., 2);
 
+
+	
+	
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
 	{
@@ -174,11 +187,19 @@ int main(int argc, char** argv)
 					
 		}
 		profondeur +=  vitesse_corridor;
-			drawCorridor(profondeur);
-			drawball();
-			drawRaquette(newX, newY);
+		
+
+		drawCorridor(profondeur, taille);
+		drawRaquette(newX, newY);
+		drawball(ball);
+		// glfwSetMouseButtonCallback(window, mouse_button_click_right);
+		
+{
+}
+		// printf("%f\n", taille);
 
 		/* Scene rendering */
+		
 		drawFrame();
 
 		// glPushMatrix();
