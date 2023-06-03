@@ -150,7 +150,7 @@ int main(int argc, char** argv)
 	float profondeur=0.;
 	float vitesse_corridor=0.2;
 	float taille = 1000;
-	Ball *ball = initBall(0, 0, 0, -0.1, 0., 0., 2);
+	Ball *ball = initBall(0., 0, 0, -0.2, 0.2, 0., 2);
 
 
 	
