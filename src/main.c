@@ -110,12 +110,16 @@ void mouse_mouv(GLFWwindow* window, double xpos, double ypos){
 	glfwGetCursorPos(window, &xpos, &ypos);
 	double h = (tan(alpha/2))*2;
 	if(xpos<WINDOW_WIDTH-120 && xpos>120){
+		if(xpos >= 120  && xpos <= WINDOW_WIDTH-120){
 		newX = -((xpos-(WINDOW_WIDTH/2.0))*(h/WINDOW_WIDTH));
 	}
 	if(ypos<WINDOW_HEIGHT-120 && ypos>120){
+		}
+	if (ypos >=120 && ypos <= WINDOW_HEIGHT -120){
 		newY = ((ypos-(WINDOW_HEIGHT/2.0))*(h/WINDOW_HEIGHT));
+		}
 	}
-	
+
 }
 
 int main(int argc, char** argv)
