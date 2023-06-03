@@ -17,6 +17,7 @@
 #include "corridor.h"
 #include "ball.h"
 #include "raquette.h"
+#include "obstacles.h"
 
 
 /* Window properties */
@@ -36,6 +37,10 @@ double newX = 0.;
 double newY = 0.;
 bool lbutton_down = false;
 double alpha = 60.0;
+
+#define NBR_OBSTACLES 8
+
+Obstacles listeObs[NBR_OBSTACLES];
 
 /* Error handling function */
 void onError(int error, const char* description)
@@ -104,12 +109,17 @@ void onKey(GLFWwindow* window, int key, int scancode, int action, int mods)
 void mouse_mouv(GLFWwindow* window, double xpos, double ypos){
 	glfwGetCursorPos(window, &xpos, &ypos);
 	double h = (tan(alpha/2))*2;
-	if(xpos >= 120  && xpos <= WINDOW_WIDTH-120){
+	if(xpos<WINDOW_WIDTH-120 && xpos>120){
+		if(xpos >= 120  && xpos <= WINDOW_WIDTH-120){
 		newX = -((xpos-(WINDOW_WIDTH/2.0))*(h/WINDOW_WIDTH));
 	}
+	if(ypos<WINDOW_HEIGHT-120 && ypos>120){
+		}
 	if (ypos >=120 && ypos <= WINDOW_HEIGHT -120){
 		newY = ((ypos-(WINDOW_HEIGHT/2.0))*(h/WINDOW_HEIGHT));
+		}
 	}
+
 }
 
 int main(int argc, char** argv)
@@ -144,7 +154,9 @@ int main(int argc, char** argv)
 	glEnable(GL_DEPTH_TEST);
 
 	float profondeur=0.;
-	float vitesse_corridor=0.2;
+	float vitesse_corridor=0.3;
+
+	positionObstacles(listeObs, NBR_OBSTACLES);
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
@@ -154,7 +166,7 @@ int main(int argc, char** argv)
 		
 
 		/* Cleaning buffers and setting Matrix Mode */
-		glClearColor(0.2,0.0,0.0,0.0);
+		glClearColor(1.0,1.0,1.0,1.0);
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -181,6 +193,9 @@ int main(int argc, char** argv)
 			drawCorridor(profondeur);
 			drawball();
 			drawRaquette(newX, newY);
+			for(int i=0; i<NBR_OBSTACLES;i++){
+				drawObstacles(profondeur,40*(i+1), listeObs[i]);
+			}
 
 		/* Scene rendering */
 		//drawFrame();
